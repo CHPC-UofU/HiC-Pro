@@ -42,14 +42,16 @@ From: ubuntu:latest
     echo "Installing dependancies ... "
     conda install -y bowtie2=2.3.5
     conda install -y samtools=1.9
+    # bowtie2 needs older tbb
+    conda install tbb=2020.2
 
     # Python (>3.7.0) with *pysam (>=0.8.3)*, *bx(>=0.5.0)*, *numpy(>=1.8.2)*, and *scipy(>=0.15.1)* libraries
     conda install -y -c conda-forge python=3.7.6
-    conda install -y -c conda-forge scipy 
-    conda install -y -c conda-forge numpy 
-    conda install -y -c bioconda bx-python 
-    conda install -y -c bioconda pysam 
-    conda install -y -c bioconda iced
+    conda install -y -c conda-forge scipy=1.4.1
+    conda install -y -c conda-forge numpy=1.18.1
+    conda install -y -c bioconda bx-python=0.8.8
+    conda install -y -c bioconda pysam=0.15.4
+    conda install -y -c bioconda iced=0.5.4
 
     # Install R
     conda update readline
@@ -66,7 +68,7 @@ From: ubuntu:latest
     echo "Installing latest HiC-Pro release ..."
     #VERSION=$(curl -s https://github.com/nservant/HiC-Pro/releases/latest | egrep -o '2.[0-9]*.[0-9]*')
     #echo "v"$VERSION".zip" | wget --base=http://github.com/nservant/HiC-Pro/archive/ -i - -O hicpro_latest.zip && unzip hicpro_latest.zip
-    VERSION="devel_py3"
+    VERSION="master"
     echo $VERSION".zip" | wget --base=http://github.com/nservant/HiC-Pro/archive/ -i - -O hicpro_latest.zip && unzip hicpro_latest.zip
     
     cd $(echo HiC-Pro-$VERSION)

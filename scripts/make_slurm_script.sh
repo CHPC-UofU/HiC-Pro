@@ -75,7 +75,7 @@ then
 #SBATCH -t ${JOB_WALLTIME}
 #SBATCH --mem-per-cpu=${JOB_MEM}
 #SBATCH -p ${JOB_QUEUE}
-
+#SBATCH --account=${JOB_ACCOUNT}
 #SBATCH --mail-user=${JOB_MAIL}
 #SBATCH --mail-type=end
 #SBATCH --job-name=HiCpro_s1_${JOB_NAME}
@@ -86,6 +86,8 @@ EOF
 	echo -e "#SBATCH --array=1-$count" >> ${torque_script}
     fi
     cat >> ${torque_script} <<EOF
+ml purge
+ml hicpro/3.0
 FASTQFILE=\$SLURM_SUBMIT_DIR/$inputfile; export FASTQFILE
 make --file ${SCRIPTS}/Makefile CONFIG_FILE=${conf_file} CONFIG_SYS=${INSTALL_PATH}/config-system.txt $make_target 2>&1
 EOF
@@ -119,11 +121,14 @@ then
 #SBATCH -t ${JOB_WALLTIME}
 #SBATCH --mem-per-cpu=${JOB_MEM}
 #SBATCH -p ${JOB_QUEUE}
-
+#SBATCH --account=${JOB_ACCOUNT}
 #SBATCH --mail-user=${JOB_MAIL}
 #SBATCH --mail-type=end
 #SBATCH --job-name=HiCpro_s2_${JOB_NAME}
 #SBATCH --export=ALL
+
+ml purge
+ml hicpro/3.0
 
 cd \$SLURM_SUBMIT_DIR
 

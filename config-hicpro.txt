@@ -22,6 +22,7 @@ JOB_MEM =
 JOB_WALLTIME = 
 JOB_QUEUE = 
 JOB_MAIL = 
+JOB_ACCOUNT =
 
 #########################################################################
 ## Data
