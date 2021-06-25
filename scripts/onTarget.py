@@ -129,7 +129,7 @@ if __name__ == "__main__":
         
     # Read the SAM/BAM file
     if verbose:
-        print("## Opening valid pairs file {}...".format(inFile), file=sys.stderr))
+        print("## Opening valid pairs file {}...".format(inFile), file=sys.stderr)
     
     vp_handle = open(inFile)
 

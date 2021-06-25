@@ -5,7 +5,10 @@ From: ubuntu:latest
     AUTHOR Nicolas Servant
 
 %pre
-    apt-get install -y debootstrap
+    #apt-get install -y debootstrap
+
+%files
+    /uufs/chpc.utah.edu/sys/srcdir/hicpro/3.0/annotation/mm10_MboI.bed /opt
 
 %post
     apt-get update
@@ -14,6 +17,11 @@ From: ubuntu:latest
     apt-get install -y bzip2
     apt-get install -y curl
     apt-get install -y unzip
+
+    # set noninteractive installation
+    export DEBIAN_FRONTEND=noninteractive
+    export TZ=America/Denver
+    apt-get install -y tzdata
     apt-get install -y git-all
 
     ## g++
@@ -78,11 +86,15 @@ From: ubuntu:latest
     cd HiC-Pro
     make configure
     make install
+    cd ..
+    rm -rf HiC-Pro
  
     # Let us save some space
     conda clean --packages -y
     conda clean --all -y
     rm -rf /usr/local/anaconda/pkgs
+    cp /opt/mm10_MboI.bed /usr/local/bin/HiC-Pro_3.0.0/annotation/MboI_resfrag_mm10.bed
+    rm /opt/mm10_MboI.bed
 
 %test
     INSTALLED_HICPRO_VERSION=$(find /usr/local/bin -name HiC-Pro | xargs dirname)
