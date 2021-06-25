@@ -14,6 +14,7 @@ From: ubuntu:latest
     apt-get install -y bzip2
     apt-get install -y curl
     apt-get install -y unzip
+    apt-get install -y git-all
 
     ## g++
     apt-get install -y build-essential
@@ -65,13 +66,16 @@ From: ubuntu:latest
     conda install -c bioconda multiqc=1.8
    
     # Install HiC-pro
-    echo "Installing latest HiC-Pro release ..."
+    echo "Installing latest CHPC HiC-Pro release ..."
     #VERSION=$(curl -s https://github.com/nservant/HiC-Pro/releases/latest | egrep -o '2.[0-9]*.[0-9]*')
     #echo "v"$VERSION".zip" | wget --base=http://github.com/nservant/HiC-Pro/archive/ -i - -O hicpro_latest.zip && unzip hicpro_latest.zip
-    VERSION="master"
-    echo $VERSION".zip" | wget --base=http://github.com/nservant/HiC-Pro/archive/ -i - -O hicpro_latest.zip && unzip hicpro_latest.zip
+    #VERSION="master"
+    #echo $VERSION".zip" | wget --base=http://github.com/nservant/HiC-Pro/archive/ -i - -O hicpro_latest.zip && unzip hicpro_latest.zip
     
-    cd $(echo HiC-Pro-$VERSION)
+    #cd $(echo HiC-Pro-$VERSION)
+    cd /root
+    git clone https://github.com/CHPC-UofU/HiC-Pro.git
+    cd HiC-Pro
     make configure
     make install
  
