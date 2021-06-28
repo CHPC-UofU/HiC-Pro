@@ -156,12 +156,12 @@ if __name__ == "__main__":
             if len(res1) > 0 and len(res2) > 0:
                 ontarget_counter += 1
                 ontarget_cap_cap_counter += 1
-                print line.strip()
+                print(line.strip())
             elif len(res1) > 0 or len(res2) > 0:
                 ontarget_counter += 1
                 ontarget_cap_rep_counter += 1
                 if not cis:
-                    print line.strip()
+                    print(line.strip())
 
         if statsFile is not None:
             if verbose:
