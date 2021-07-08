@@ -18,6 +18,7 @@ From: ubuntu:latest
     apt-get install -y curl
     apt-get install -y unzip
     apt-get install -y gawk
+    apt-get install -y vim
 
     # set noninteractive installation
     export DEBIAN_FRONTEND=noninteractive
@@ -52,8 +53,6 @@ From: ubuntu:latest
     echo "Installing dependancies ... "
     conda install -y bowtie2=2.3.5
     conda install -y samtools=1.9
-    # bowtie2 needs older tbb
-    conda install tbb=2020.2
 
     # Python (>3.7.0) with *pysam (>=0.8.3)*, *bx(>=0.5.0)*, *numpy(>=1.8.2)*, and *scipy(>=0.15.1)* libraries
     conda install -y -c conda-forge python=3.7.6
@@ -74,6 +73,9 @@ From: ubuntu:latest
     # Install MultiQC
     conda install -c bioconda multiqc=1.8
    
+    # bowtie2 needs older tbb
+    conda install tbb=2020.2
+
     # Install HiC-pro
     echo "Installing latest CHPC HiC-Pro release ..."
     #VERSION=$(curl -s https://github.com/nservant/HiC-Pro/releases/latest | egrep -o '2.[0-9]*.[0-9]*')
