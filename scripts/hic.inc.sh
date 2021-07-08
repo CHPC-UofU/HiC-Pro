@@ -203,7 +203,9 @@ get_hic_files()
 	    fi
 	    ## raw data for mapping
 	    if [[ $ext == ".fastq" || $ext == ".fq" ]]; then
-                cat $FASTQFILE | filter_rawdir | filter_pairs | awk "NR == $TASKID && \$1 ~ \"${ext}(.gz)*$\"{printf(\"%s/%s${ext}\n\", \"$idir\", gensub(\"${ext}(.gz)*$\", \"\", \$1));}"
+                # MC the additional ${ext} adds .fastq as a file suffix which is incorrect
+                #cat $FASTQFILE | filter_rawdir | filter_pairs | awk "NR == $TASKID && \$1 ~ \"${ext}(.gz)*$\"{printf(\"%s/%s${ext}\n\", \"$idir\", gensub(\"${ext}(.gz)*$\", \"\", \$1));}"
+                cat $FASTQFILE | filter_rawdir | filter_pairs | awk "NR == $TASKID && \$1 ~ \"${ext}(.gz)*$\"{printf(\"%s/%s\n\", \"$idir\", gensub(\"${ext}(.gz)*$\", \"\", \$1));}"
 	    else
 		cat $FASTQFILE | filter_rawdir | filter_pairs | awk "NR == $TASKID {printf(\"%s/%s${ext}\n\", \"$idir\", gensub(\"${pattern}\", \"\", \$1));}"
     	    fi
