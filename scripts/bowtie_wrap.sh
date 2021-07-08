@@ -24,9 +24,7 @@ end_to_end_align()
     fi
     
     ## Output
-    print("infile: ",infile)
     prefix=$(basename ${infile} | sed -e 's/.fastq\(.gz\)*$//' -e 's/.fq\(.gz\)*$//')
-    print("prefix: ",prefix)
     
     ## Unmapped reads
     if [[ $unmap == 1 ]]; then
